@@ -36,7 +36,7 @@ class Posts extends StatelessWidget {
           itemBuilder: (context, index) {
             final doc = data[index];
             final postMap = doc.data() as Map<String, dynamic>;
-            final String postId = doc.id; // ID necessário para deletar
+            final String postId = doc.id;
 
             return GestureDetector(
               onTap: () {

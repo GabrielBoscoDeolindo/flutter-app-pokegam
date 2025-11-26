@@ -48,8 +48,16 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20),
               
               const Text("Pokegam", style: TextStyle(fontSize: 40, color: Colors.white)),
+
+              const SizedBox(height: 10),
+              const Text(
+                "Entre com o nome de usuário de sua escolha!\nSuas informações serão salvas",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey, fontSize: 14),
+              ),
               
               const SizedBox(height: 40),
+              
               TextField(
                 controller: _userController,
                 style: const TextStyle(color: Colors.white),
@@ -75,9 +83,15 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity, height: 45,
                 child: ElevatedButton(
                   onPressed: _fazerLogin,
-                  style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFB241FF), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFB241FF), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
                   child: const Text("Entrar", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
+              ),
+
+              const SizedBox(height: 20),
+              const Text(
+                "(ei, a senha é 1234 shhhhhh)",
+                style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ],
           ),

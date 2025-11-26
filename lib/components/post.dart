@@ -72,7 +72,6 @@ class _PostPageState extends State<PostPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Cabeçalho simples
             Row(
               children: [
                 const Icon(Icons.account_circle, color: Colors.grey),
