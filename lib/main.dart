@@ -7,15 +7,21 @@ import 'components/posts_grid.dart';
 import 'components/post.dart'; 
 import 'login.dart';
 import 'feed_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  final prefs = await SharedPreferences.getInstance();
+  final savedUser = prefs.getString("username");
+
+  runApp(MyApp(initialUser: savedUser));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String? initialUser;
+
+  const MyApp({super.key, this.initialUser});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +29,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        fontFamily: 'Pokemon', 
+        fontFamily: 'Pokemon',
       ),
-      home: const LoginPage(),
+      home: initialUser != null
+          ? ProfilePage(username: initialUser!)
+          : const LoginPage(),
     );
   }
 }
@@ -42,7 +50,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   int _selectedIndex = 1;
 
-  void _logout() {
+  Future<void> _logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("username");
+    if (!mounted) return;
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const LoginPage()),
